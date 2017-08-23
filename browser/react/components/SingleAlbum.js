@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Songs from '../components/Songs';
+import pathName from 'path'; 
 
 
 export default class SingleAlbum extends Component {
@@ -21,14 +22,14 @@ export default class SingleAlbum extends Component {
   }
 
   render () {
-    console.log('this.props.match.params', this.props.match.params)
+    console.log('this.props', this.props)
     const album = this.state.album;
 
     return (
       <div className="album">
         <div>
-          <h3>{ album.name }</h3>
-          <img src={ album.imageUrl } className="img-thumbnail" />
+          <h3>{ album.name }  <a href = {`mailto:?subject=Recommended Album: ${album.name}&body=Check out this album! ${pathName.join(document.location.origin, this.props.match.url)}`} ><button className = "btn btn-default" name="Share">Share</button></a></h3>
+          <div><img src={ album.imageUrl } className="img-thumbnail" /></div>
         </div>
         <Songs songs={album.songs} />
       </div>
