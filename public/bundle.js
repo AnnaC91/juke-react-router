@@ -11911,10 +11911,6 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _axios = __webpack_require__(62);
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _AllAlbums = __webpack_require__(122);
 
 var _AllAlbums2 = _interopRequireDefault(_AllAlbums);
@@ -11922,6 +11918,14 @@ var _AllAlbums2 = _interopRequireDefault(_AllAlbums);
 var _SingleAlbum = __webpack_require__(125);
 
 var _SingleAlbum2 = _interopRequireDefault(_SingleAlbum);
+
+var _AllArtists = __webpack_require__(255);
+
+var _AllArtists2 = _interopRequireDefault(_AllArtists);
+
+var _SingleArtist = __webpack_require__(256);
+
+var _SingleArtist2 = _interopRequireDefault(_SingleArtist);
 
 var _Sidebar = __webpack_require__(124);
 
@@ -11940,6 +11944,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import axios from 'axios';
+
 
 var Main = function (_Component) {
   _inherits(Main, _Component);
@@ -11947,52 +11953,53 @@ var Main = function (_Component) {
   function Main(props) {
     _classCallCheck(this, Main);
 
-    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
-
-    _this.state = {};
+    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+    // this.state = {
+    // };
     // this.selectAlbum = this.selectAlbum.bind(this);
     // this.deselectAlbum = this.deselectAlbum.bind(this);
-    return _this;
   }
 
-  _createClass(Main, [{
-    key: 'selectAlbum',
-    value: function selectAlbum(albumId) {
-      var _this2 = this;
+  // selectAlbum(albumId) {
+  //   axios.get(`/api/albums/${albumId}`)
+  //     .then(res => res.data)
+  //     .then(album => this.setState({
+  //       selectedAlbum: album
+  //     }));
+  // }
 
-      _axios2.default.get('/api/albums/' + albumId).then(function (res) {
-        return res.data;
-      }).then(function (album) {
-        return _this2.setState({
-          selectedAlbum: album
-        });
-      });
-    }
-  }, {
-    key: 'deselectAlbum',
-    value: function deselectAlbum() {
-      this.setState({ selectedAlbum: {} });
-    }
-  }, {
+  // deselectAlbum() {
+  //   this.setState({ selectedAlbum: {} });
+  // }
+
+  _createClass(Main, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { id: 'main', className: 'container-fluid' },
+        _reactRouterDom.HashRouter,
+        null,
         _react2.default.createElement(
           'div',
-          { className: 'col-xs-2' },
-          _react2.default.createElement(_Sidebar2.default, { deselectAlbum: this.deselectAlbum })
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.HashRouter,
-          null,
+          { id: 'main', className: 'container-fluid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-xs-2' },
+            _react2.default.createElement(_Sidebar2.default, { deselectAlbum: this.deselectAlbum })
+          ),
           _react2.default.createElement(
             'div',
             { className: 'col-xs-10' },
             _react2.default.createElement(
               _reactRouterDom.Switch,
               null,
+              _react2.default.createElement(_reactRouterDom.Route, {
+                path: '/artists/:artistId',
+                component: _SingleArtist2.default
+              }),
+              _react2.default.createElement(_reactRouterDom.Route, {
+                path: '/artists',
+                component: _AllArtists2.default
+              }),
               _react2.default.createElement(_reactRouterDom.Route, {
                 path: '/albums/:albumId',
                 component: _SingleAlbum2.default
@@ -12006,9 +12013,9 @@ var Main = function (_Component) {
                 component: _AllAlbums2.default
               })
             )
-          )
-        ),
-        _react2.default.createElement(_Player2.default, null)
+          ),
+          _react2.default.createElement(_Player2.default, null)
+        )
       );
     }
   }]);
@@ -12891,6 +12898,8 @@ var _axios = __webpack_require__(62);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRouterDom = __webpack_require__(230);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12898,42 +12907,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var fakeAlbums = [{
-  name: 'Abbey Road',
-  id: 1,
-  imageUrl: 'http://fillmurray.com/300/300',
-  songs: [{
-    id: 1,
-    name: 'Romeo & Juliette',
-    artists: [{ name: 'Bill' }],
-    genre: 'Funk',
-    audioUrl: 'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3'
-  }, {
-    id: 2,
-    name: 'White Rabbit',
-    artists: [{ name: 'Bill' }, { name: 'Alice' }],
-    genre: 'Fantasy',
-    audioUrl: 'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3'
-  }, {
-    id: 3,
-    name: 'Lucy in the Sky with Diamonds',
-    artists: [{ name: 'Bob' }],
-    genre: 'Space',
-    audioUrl: 'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3'
-  }]
-}, {
-  name: 'Yellow Submarine',
-  id: 2,
-  imageUrl: 'http://fillmurray.com/300/300',
-  songs: [{
-    id: 4,
-    name: 'London Calling',
-    artists: [{ name: 'Bill' }],
-    genre: 'Punk',
-    audioUrl: 'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3'
-  }]
-}];
 
 var AllAlbums = function (_Component) {
   _inherits(AllAlbums, _Component);
@@ -12957,6 +12930,7 @@ var AllAlbums = function (_Component) {
       _axios2.default.get('/api/albums/').then(function (res) {
         return res.data;
       }).then(function (albums) {
+        console.log(albums); //this works
         _this2.setState({ albums: albums });
       });
     }
@@ -12965,8 +12939,8 @@ var AllAlbums = function (_Component) {
     value: function render() {
       // const albums = this.props.albums;
       var albums = this.state.albums;
-      var selectAlbum = this.props.selectAlbum;
-      console.log("this.props", this.props);
+      // const selectAlbum = this.props.selectAlbum;
+      console.log("this.state.albums", this.state.albums); //this doesn't... :<
       return _react2.default.createElement(
         'div',
         null,
@@ -12983,10 +12957,8 @@ var AllAlbums = function (_Component) {
               'div',
               { className: 'col-xs-4', key: album.id },
               _react2.default.createElement(
-                'a',
-                { className: 'thumbnail', href: '#', onClick: function onClick() {
-                    return selectAlbum(album.id);
-                  } },
+                _reactRouterDom.Link,
+                { className: 'thumbnail', to: '/albums/' + album.id },
                 _react2.default.createElement('img', { src: album.imageUrl }),
                 _react2.default.createElement(
                   'div',
@@ -13094,6 +13066,8 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(230);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Sidebar = function Sidebar(props) {
@@ -13101,19 +13075,32 @@ var Sidebar = function Sidebar(props) {
   var deselectAlbum = props.deselectAlbum;
 
   return _react2.default.createElement(
-    "sidebar",
+    'sidebar',
     null,
-    _react2.default.createElement("img", { src: "juke.svg", className: "logo" }),
+    _react2.default.createElement('img', { src: 'juke.svg', className: 'logo' }),
     _react2.default.createElement(
-      "section",
+      'section',
       null,
       _react2.default.createElement(
-        "h4",
-        { className: "menu-item active" },
+        'h4',
+        { className: 'menu-item active' },
         _react2.default.createElement(
-          "a",
-          { href: "#", onClick: deselectAlbum },
-          "ALBUMS"
+          _reactRouterDom.Link,
+          { to: '/albums' },
+          'ALBUMS'
+        )
+      )
+    ),
+    _react2.default.createElement(
+      'section',
+      null,
+      _react2.default.createElement(
+        'h4',
+        { className: 'menu-item active' },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/artists' },
+          'ARTISTS'
         )
       )
     )
@@ -13139,6 +13126,10 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(62);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _Songs = __webpack_require__(126);
 
 var _Songs2 = _interopRequireDefault(_Songs);
@@ -13151,33 +13142,37 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var fakeAlbum = {
-  name: 'Yellow Submarine',
-  id: 2,
-  imageUrl: 'http://fillmurray.com/300/300',
-  songs: [{
-    id: 4,
-    name: 'London Calling',
-    artists: [{ name: 'Bill' }],
-    genre: 'Punk',
-    audioUrl: 'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3'
-  }]
-};
-
 var SingleAlbum = function (_Component) {
   _inherits(SingleAlbum, _Component);
 
   function SingleAlbum(props) {
     _classCallCheck(this, SingleAlbum);
 
-    return _possibleConstructorReturn(this, (SingleAlbum.__proto__ || Object.getPrototypeOf(SingleAlbum)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SingleAlbum.__proto__ || Object.getPrototypeOf(SingleAlbum)).call(this, props));
+
+    _this.state = {
+      album: {}
+    };
+    return _this;
   }
 
   _createClass(SingleAlbum, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var albumId = this.props.match.params.albumId;
+      _axios2.default.get('/api/albums/' + albumId).then(function (res) {
+        return res.data;
+      }).then(function (album) {
+        _this2.setState({ album: album });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       console.log('this.props.match.params', this.props.match.params);
-      var album = fakeAlbum;
+      var album = this.state.album;
 
       return _react2.default.createElement(
         'div',
@@ -27793,6 +27788,191 @@ function valueEqual(a, b) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (valueEqual);
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(62);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _reactRouterDom = __webpack_require__(230);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AllArtists = function (_Component) {
+    _inherits(AllArtists, _Component);
+
+    function AllArtists(props) {
+        _classCallCheck(this, AllArtists);
+
+        var _this = _possibleConstructorReturn(this, (AllArtists.__proto__ || Object.getPrototypeOf(AllArtists)).call(this, props));
+
+        _this.state = {
+            artists: []
+        };
+        return _this;
+    }
+
+    _createClass(AllArtists, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            _axios2.default.get('/api/artists/') //not that sure here but check route later
+            .then(function (res) {
+                return res.data;
+            }).then(function (artists) {
+                console.log(artists);
+                _this2.setState({ artists: artists });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            // const  = this.props.;
+            var artists = this.state.artists;
+
+            console.log("this.state.", this.state.artist);
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Artists'
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'list-group' },
+                    this.state.artists.map(function (artist) {
+                        return _react2.default.createElement(
+                            'div',
+                            { className: 'list-group-item', key: artist.id },
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '' },
+                                artist.name
+                            )
+                        );
+                    })
+                )
+            );
+        }
+    }]);
+
+    return AllArtists;
+}(_react.Component);
+
+exports.default = AllArtists;
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(62);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SingleArtist = function (_Component) {
+    _inherits(SingleArtist, _Component);
+
+    function SingleArtist(props) {
+        _classCallCheck(this, SingleArtist);
+
+        var _this = _possibleConstructorReturn(this, (SingleArtist.__proto__ || Object.getPrototypeOf(SingleArtist)).call(this, props));
+
+        _this.state = {
+            artist: {}
+        };
+        return _this;
+    }
+
+    _createClass(SingleArtist, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            var artistId = this.props.match.params.artistId;
+            _axios2.default.get('/api/artists/' + artistId).then(function (res) {
+                return res.data;
+            }).then(function (artist) {
+                _this2.setState({ artist: artist });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            console.log('this.props.match.params', this.props.match.params);
+            var artist = this.state.artist;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    'ARTIST NAME'
+                ),
+                _react2.default.createElement(
+                    'h4',
+                    null,
+                    'ALBUMS'
+                ),
+                _react2.default.createElement(
+                    'h4',
+                    null,
+                    'SONGS'
+                )
+            );
+        }
+    }]);
+
+    return SingleArtist;
+}(_react.Component);
+
+exports.default = SingleArtist;
 
 /***/ })
 /******/ ]);
