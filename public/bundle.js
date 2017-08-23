@@ -13167,10 +13167,10 @@ var fakeAlbum = {
 var SingleAlbum = function (_Component) {
   _inherits(SingleAlbum, _Component);
 
-  function SingleAlbum() {
+  function SingleAlbum(props) {
     _classCallCheck(this, SingleAlbum);
 
-    return _possibleConstructorReturn(this, (SingleAlbum.__proto__ || Object.getPrototypeOf(SingleAlbum)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (SingleAlbum.__proto__ || Object.getPrototypeOf(SingleAlbum)).call(this, props));
   }
 
   _createClass(SingleAlbum, [{

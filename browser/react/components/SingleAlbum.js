@@ -19,7 +19,11 @@ const fakeAlbum = {
 };
 
 export default class SingleAlbum extends Component {
+  constructor(props) {
+    super(props)
 
+  }
+  
   render () {
     console.log('this.props.match.params', this.props.match.params)
     const album = fakeAlbum;
