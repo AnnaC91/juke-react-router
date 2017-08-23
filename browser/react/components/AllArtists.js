@@ -10,20 +10,21 @@ export default class AllArtists extends Component {
         }
     }
 
+
+    
     componentDidMount() {
         axios.get('/api/artists/') //not that sure here but check route later
             .then(res => res.data)
             .then(artists => {
-                console.log(artists)
                 this.setState({ artists })
             });
     }
 
+
+
     render() {
         // const  = this.props.;
         const artists = this.state.artists;
-
-        console.log("this.state.", this.state.artist)
         return (
             <div>
                 <h3>Artists</h3>
@@ -33,7 +34,7 @@ export default class AllArtists extends Component {
                             return (
                                 <div className="list-group-item" key={artist.id}>
                                     {/* determine where to actually Link to later! */}
-                                    <Link to="">{artist.name}</Link>
+                                    <Link to={`/artists/${artist.id}`}>{artist.name}</Link>
                                 </div>
                             )
                         })
